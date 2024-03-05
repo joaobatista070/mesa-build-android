@@ -56,7 +56,6 @@ jobs:
             -Dvulkan-drivers= \
             -Dgallium-drivers=zink,virgl \
             -Dshared-glapi=false \
-            -Dandroid-libbacktrace=disabled \
             -Dbuildtype=release
           ninja -C "build-android" install
           cp /tmp/zink/lib/libOSMesa.so.8.0.0 /tmp/zink/lib/libOSMesa_8.so
