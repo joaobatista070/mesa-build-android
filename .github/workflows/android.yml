@@ -54,14 +54,13 @@ jobs:
             -Dopengl=true \
             -Dosmesa=true \
             -Dvulkan-drivers= \
-            -Dgallium-drivers=zink,virgl \
+            -Dgallium-drivers=zink \
             -Dshared-glapi=false \
             -Dbuildtype=release
           ninja -C "build-android" install
-          cp /tmp/zink/lib/libOSMesa.so.8.0.0 /tmp/zink/lib/libOSMesa_8.so
       - name: Upload libraries
         uses: actions/upload-artifact@v2
         with:
           name: libzink_${{matrix.arch}}
-          path: /tmp/zink/lib/libOSMesa_8.so
+          path: /tmp/zink/lib/
 
