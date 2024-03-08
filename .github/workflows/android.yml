@@ -41,12 +41,12 @@ jobs:
           cd mesa
           git apply --reject --whitespace=fix ../mesa-zink.diff || echo "git apply failed"
           meson setup "build-android" \
-            --prefix=/tmp/zink \
+            --prefix=/tmp/llvm \
             --cross-file "../build-crossfile" \
             -Dplatforms=android \
-            -Dplatform-sdk-version=25 \
+            -Dplatform-sdk-version=33 \
             -Dandroid-stub=true \
-            -Dllvm=disabled \
+            -Dllvm=enabled \
             -Dxlib-lease=disabled \
             -Degl=disabled \
             -Dgbm=disabled \
@@ -54,15 +54,15 @@ jobs:
             -Dopengl=true \
             -Dosmesa=true \
             -Dvulkan-drivers= \
-            -Dgallium-drivers=zink \
+            -Dgallium-drivers=swrast \
             -Dshared-glapi=false \
             -Dandroid-libbacktrace=disabled \
             -Dbuildtype=release
           ninja -C "build-android" install
-          cp /tmp/zink/lib/libOSMesa.so.8.0.0 /tmp/zink/lib/libOSMesa_8.so
+          cp /tmp/llvm/lib/libOSMesa.so.8.0.0 /tmp/llvm/lib/libOSMesa_8.so
       - name: Upload libraries
         uses: actions/upload-artifact@v2
         with:
-          name: libzink_${{matrix.arch}}
-          path: /tmp/zink/lib/libOSMesa_8.so
+          name: libllvm_${{matrix.arch}}
+          path: /tmp/llvm/lib/libOSMesa_8.so
 
