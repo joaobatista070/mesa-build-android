@@ -43,7 +43,7 @@ jobs:
           meson setup "build-android" \
             --prefix=/tmp/llvm \
             --cross-file "../build-crossfile" \
-            -Dtools=llvmpipe
+            -Dtools=glsl
             -Dplatforms=android \
             -Dplatform-sdk-version=33 \
             -Dandroid-stub=true \
