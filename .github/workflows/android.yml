@@ -56,7 +56,6 @@ jobs:
             -Dvulkan-drivers= \
             -Dgallium-drivers=swrast \
             -Dshared-glapi=false \
-            -Dandroid-libbacktrace=disabled \
             -Dbuildtype=release
           ninja -C "build-android" install
           cp /tmp/llvm/lib/libOSMesa.so.8.0.0 /tmp/llvm/lib/libOSMesa_8.so
