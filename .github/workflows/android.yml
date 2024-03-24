@@ -37,7 +37,7 @@ jobs:
           pip3 install mako
           export ANDROID_NDK_HOME="$ANDROID_SDK_ROOT/ndk-bundle"
           envsubst <android-${{matrix.arch}} >build-crossfile
-          git clone --depth 1 https://github.com/alexvorxx/mesa-zink-11.06.22
+          git clone --depth 1 https://github.com/alexvorxx/Mesa-VirGL
           cd mesa
           git apply --reject --whitespace=fix ../mesa-zink.diff || echo "git apply failed"
           meson setup "build-android" \
@@ -53,7 +53,7 @@ jobs:
             -Dglx=disabled \
             -Dopengl=true \
             -Dosmesa=true \
-            -Dvulkan-drivers=swrast,zink \
+            -Dvulkan-drivers=swrast,virgl \
             -Dgallium-drivers= \
             -Dshared-glapi=false \
             -Dandroid-libbacktrace=disabled \
