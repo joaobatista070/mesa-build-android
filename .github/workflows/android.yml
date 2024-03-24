@@ -37,7 +37,7 @@ jobs:
           pip3 install mako
           export ANDROID_NDK_HOME="$ANDROID_SDK_ROOT/ndk-bundle"
           envsubst <android-${{matrix.arch}} >build-crossfile
-          git clone --depth 1 --branch 23.2 https://gitlab.freedesktop.org/mesa/mesa.git
+          git clone --depth 1 https://github.com/Vera-Firefly/panfork_offscreen_rootless
           cd mesa
           git apply --reject --whitespace=fix ../mesa-zink.diff || echo "git apply failed"
           meson setup "build-android" \
@@ -54,7 +54,7 @@ jobs:
             -Dopengl=true \
             -Dosmesa=true \
             -Dvulkan-drivers= \
-            -Dgallium-drivers=virgl \
+            -Dgallium-drivers=zink,virgl \
             -Dshared-glapi=false \
             -Dandroid-libbacktrace=disabled \
             -Dbuildtype=release
