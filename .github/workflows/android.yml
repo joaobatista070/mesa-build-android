@@ -38,7 +38,6 @@ jobs:
           export ANDROID_NDK_HOME="$ANDROID_SDK_ROOT/ndk-bundle"
           envsubst <android-${{matrix.arch}} >build-crossfile
           git clone --depth 1 https://github.com/alexvorxx/Mesa-VirGL
-          git apply --reject --whitespace=fix ../mesa-zink.diff || echo "git apply failed"
           meson setup "build-android" \
             --prefix=/tmp/mesa \
             --cross-file "../build-crossfile" \
