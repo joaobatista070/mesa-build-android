@@ -53,8 +53,8 @@ jobs:
             -Dglx=disabled \
             -Dopengl=true \
             -Dosmesa=true \
-            -Dvulkan-drivers=swrast,zink,virgl \
-            -Dgallium-drivers= \
+            -Dvulkan-drivers= \
+            -Dgallium-drivers=swrast,zink,virgl \
             -Dshared-glapi=false \
             -Dandroid-libbacktrace=disabled \
             -Dbuildtype=release
