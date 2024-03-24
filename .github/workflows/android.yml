@@ -37,7 +37,9 @@ jobs:
           pip3 install mako
           export ANDROID_NDK_HOME="$ANDROID_SDK_ROOT/ndk-bundle"
           envsubst <android-${{matrix.arch}} >build-crossfile
-          git clone --depth 1 https://github.com/alexvorxx/mesa-zink-11.06.22
+          git clone --depth 1 --branch 23.2 https://gitlab.freedesktop.org/mesa/mesa.git
+          cd mesa
+          git apply --reject --whitespace=fix ../mesa-zink.diff || echo "git apply failed"
           meson setup "build-android" \
             --prefix=/tmp/mesa \
             --cross-file "../build-crossfile" \
@@ -51,16 +53,16 @@ jobs:
             -Dglx=disabled \
             -Dopengl=true \
             -Dosmesa=true \
-            -Dvulkan-drivers=swrast,virgl \
+            -Dvulkan-drivers=swrast,zink,virgl \
             -Dgallium-drivers= \
             -Dshared-glapi=false \
             -Dandroid-libbacktrace=disabled \
             -Dbuildtype=release
           ninja -C "build-android" install
-          cp /tmp/mesa/lib/libOSMesa.so.8.0.0 /tmp/mesa/lib/libOSMesa_8.so
+          cp /tmp/mesa/lib/libOSMesa.so.8.0.0 /tmp/mesa/lib/libOSMesa_81.so
       - name: Upload libraries
         uses: actions/upload-artifact@v2
         with:
           name: libOSMesa_${{matrix.arch}}
-          path: /tmp/mesa/lib/libOSMesa_8.so
+          path: /tmp/mesa/lib/libOSMesa_81.so
 
