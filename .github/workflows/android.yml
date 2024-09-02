@@ -42,8 +42,7 @@ jobs:
           meson setup "build-android" \
             --prefix=/tmp/mesa \
             --cross-file "../build-crossfile" \
-            -Dplatforms=android \
-            -Dplatform-sdk-version=33 \
+            -Dplatforms= \
             -Dllvm=disabled \
             -Ddri3=disabled \
             -Dimagination-srv=true \
