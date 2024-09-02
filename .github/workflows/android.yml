@@ -37,8 +37,8 @@ jobs:
           pip3 install mako
           export ANDROID_NDK_HOME="$ANDROID_SDK_ROOT/ndk-bundle"
           envsubst <android-${{matrix.arch}} >build-crossfile
-          git clone --depth 1 https://github.com/alexvorxx/zink-xlib-termux
-          cd ..
+          git clone --depth 1 https://github.com/alexvorxx/zink-xlib-termux 
+          cd zink-xlib-termux && mkdir build-android
           meson setup "build-android" \
             --prefix=/tmp/mesa \
             --cross-file "../build-crossfile" \
