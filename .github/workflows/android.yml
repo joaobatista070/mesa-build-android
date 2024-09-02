@@ -46,7 +46,7 @@ jobs:
             -Dplatform-sdk-version=33 \
             -Dllvm=disabled \
             -Ddri3=disabled \
-             -Dimagination-srv=true 
+            -Dimagination-srv=true \
             -Dvulkan-drivers=imagination-experimental \
             -Dgallium-drivers= \
             -Dbuildtype=release
