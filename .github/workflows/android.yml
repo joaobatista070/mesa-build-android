@@ -44,12 +44,11 @@ jobs:
             --cross-file "../build-crossfile" \
             -Dplatforms=android \
             -Dplatform-sdk-version=33 \
-            -Dllvm=false \
-            -Dglx=xlib \
+            -Dllvm=disabled \
             -Ddri3=disabled \
-            -Dopengl=true \
-            -Dvulkan-drivers= \
-            -Dgallium-drivers=zink \
+             -Dimagination-srv=true 
+            -Dvulkan-drivers=imagination-experimental \
+            -Dgallium-drivers= \
             -Dbuildtype=release
           ninja -C "build-android" install
           cp /tmp/mesa
