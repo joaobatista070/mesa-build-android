@@ -37,31 +37,25 @@ jobs:
           pip3 install mako
           export ANDROID_NDK_HOME="$ANDROID_SDK_ROOT/ndk-bundle"
           envsubst <android-${{matrix.arch}} >build-crossfile
-          git clone --depth 1 https://github.com/Vera-Firefly/panfork_offscreen_rootless
+          git clone --depth 1 https://github.com/alexvorxx/zink-xlib-termux
           cd ..
           meson setup "build-android" \
             --prefix=/tmp/mesa \
             --cross-file "../build-crossfile" \
             -Dplatforms=android \
             -Dplatform-sdk-version=33 \
-            -Dandroid-stub=true \
-            -Dllvm=disabled \
-            -Dxlib-lease=disabled \
-            -Degl=disabled \
-            -Dgbm=disabled \
-            -Dglx=disabled \
+            -Dllvm=false \
+            -Dglx=xlib \
+            -Ddri3=disabled \
             -Dopengl=true \
-            -Dosmesa=true \
             -Dvulkan-drivers= \
-            -Dgallium-drivers=zink,virgl \
-            -Dshared-glapi=false \
-            -Dandroid-libbacktrace=disabled \
+            -Dgallium-drivers=zink \
             -Dbuildtype=release
           ninja -C "build-android" install
-          cp /tmp/mesa/lib/libOSMesa.so.8.0.0 /tmp/mesa/lib/libOSMesa_81.so
+          cp /tmp/mesa
       - name: Upload libraries
         uses: actions/upload-artifact@v2
         with:
-          name: libOSMesa_${{matrix.arch}}
-          path: /tmp/mesa/lib/libOSMesa_81.so
+          name: mesa${{matrix.arch}}
+          path: /tmp/mesa
 
